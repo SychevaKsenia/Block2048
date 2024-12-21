@@ -13,7 +13,8 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp)
+file(GLOB_RECURSE SOURCES src/src/*.cpp)
+add_executable(main src/src/main.cpp ${SOURCES})
 target_link_libraries(main PRIVATE sfml-graphics sfml-window sfml-system)
 target_compile_features(main PRIVATE cxx_std_17)
 
