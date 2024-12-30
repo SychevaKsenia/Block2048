@@ -28,7 +28,9 @@ int main()
         }
         Color color(255, 165, 0);
         block->Update(time);
-        // std::cout << time << std::endl;
+        // std::cout << block->getState() << std::endl;
+        //  block1->Update(time);
+        //   std::cout << time << std::endl;
 
         window.clear(sf::Color::White);
 

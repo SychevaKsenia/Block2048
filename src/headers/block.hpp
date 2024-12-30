@@ -18,6 +18,7 @@ private:
     Direction m_direction = Direction::RIGHT;
     int m_value;
     BlockController *m_controller;
+    bool m_state;
 
 public:
     ~Block();
@@ -28,10 +29,12 @@ public:
     void setPosition(sf::Vector2f &pos);
     void setDirection(Direction direction);
     void setValue(int &value);
+    void setState(bool state);
 
     sf::Vector2f getSize() const;
     sf::Vector2f getPosition() const;
     sf::Sprite getSprite() const;
     Direction getDirection() const;
     int getValue() const;
+    bool getState() const;
 };

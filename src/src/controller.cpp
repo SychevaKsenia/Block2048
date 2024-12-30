@@ -1,45 +1,51 @@
 #include "../headers/controller.hpp"
 #include "../headers/block.hpp"
 #include <iostream>
-BlockController *BlockController::controller = nullptr;
+// BlockController *BlockController::controller = nullptr;
 
 BlockController::~BlockController()
 {
-    delete controller;
+    // delete controller;
 }
 
-BlockController *BlockController::getBlockController()
-{
-    if (!controller)
-    {
-        controller = new BlockController();
-    }
+// BlockController *BlockController::getBlockController()
+// {
+//     // if (!controller)
+//     // {
+//     //     controller = new BlockController();
+//     // }
+//     BlockController controller();
 
-    return controller;
+//     return controller;
+// }
+
+BlockController::BlockController()
+{
+    std::cout << "Create Controller" << std::endl;
 }
 
 void BlockController::controll(Block *block, float time)
 {
-    sf::Vector2f updated_pos = block->getPosition();
+    if (block->getState())
+    {
+        sf::Vector2f updated_pos = block->getPosition();
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    {
-        updated_pos.x -= 100;
-        block->setDirection(Direction::LEFT);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            updated_pos.x -= 100;
+            block->setDirection(Direction::LEFT);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            updated_pos.x += 100;
+            block->setDirection(Direction::RIGHT);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            updated_pos.y = 600;
+            block->setState(false);
+        }
+        std::cout << updated_pos.x << " " << updated_pos.y << std::endl;
+        block->setPosition(updated_pos);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    {
-        updated_pos.x += 100;
-        block->setDirection(Direction::RIGHT);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    {
-        updated_pos.y -= PLAYER_SPEED * time;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    {
-        updated_pos.y += PLAYER_SPEED * time;
-    }
-    std::cout << updated_pos.x << " " << updated_pos.y << std::endl;
-    block->setPosition(updated_pos);
 }

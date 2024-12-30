@@ -5,17 +5,18 @@ class Block;
 class BlockController
 {
 private:
-    BlockController() = default;
+    // BlockController() = default;
 
-    static BlockController *controller;
+    // static BlockController *controller;
 
 public:
-    BlockController(BlockController const &) = delete;
-    void operator=(BlockController const &) = delete;
-
+    // BlockController(BlockController const &) = delete;
+    //  void operator=(BlockController const &) = delete;
+    BlockController();
     ~BlockController();
 
-    static BlockController *getBlockController();
+    // static
+    BlockController *getBlockController();
 
     void controll(Block *block, float time);
 };

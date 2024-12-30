@@ -6,8 +6,9 @@ Block::Block(sf::Texture &texture, sf::Vector2f start_pos, int value)
 {
     m_pos = start_pos;
     m_value = value;
-    m_controller = BlockController::getBlockController();
-
+    m_state = true;
+    // m_controller = BlockController::getBlockController();
+    BlockController m_controller;
     m_sprite.setTexture(texture);
     m_size = sf::Vector2f(m_sprite.getTextureRect().width, m_sprite.getTextureRect().height);
 }
@@ -33,6 +34,11 @@ void Block::setValue(int &value)
     m_value = value;
 }
 
+void Block::setState(bool state)
+{
+    m_state = state;
+}
+
 sf::Vector2f Block::getSize() const
 {
     return m_size;
@@ -56,4 +62,9 @@ Direction Block::getDirection() const
 int Block::getValue() const
 {
     return m_value;
+}
+
+bool Block::getState() const
+{
+    return m_state;
 }
