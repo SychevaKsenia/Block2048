@@ -1,5 +1,6 @@
 #include "../headers/controller.hpp"
 #include "../headers/block.hpp"
+#include "../headers/constants.hpp"
 #include <iostream>
 // BlockController *BlockController::controller = nullptr;
 
@@ -32,17 +33,17 @@ void BlockController::controll(Block *block, float time)
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
-            updated_pos.x -= 100;
+            updated_pos.x -= SIZE_BLOCK;
             block->setDirection(Direction::LEFT);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            updated_pos.x += 100;
+            updated_pos.x += SIZE_BLOCK;
             block->setDirection(Direction::RIGHT);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         {
-            updated_pos.y = 600;
+            updated_pos.y = SIZE_BLOCK * SIZE_BOARD_HEIGHT;
             block->setState(false);
         }
         std::cout << updated_pos.x << " " << updated_pos.y << std::endl;

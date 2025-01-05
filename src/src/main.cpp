@@ -1,19 +1,24 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+#include "../headers/board.hpp"
 #include "../headers/block.hpp"
+#include "../headers/constants.hpp"
 #include <iostream>
 using namespace sf;
 
 int main()
 {
-    sf::RenderWindow window({600u, 700u}, "Block2028");
-    window.setFramerateLimit(144);
+    sf::RenderWindow window({WINDOW_WEIGHT, WINDOW_HEIGHT}, "Block2028");
+    // window.setFramerateLimit(144);
+
+    Board *board = new Board();
+
     sf::Texture block_texture;
     block_texture.loadFromFile("source/cat1.jpg");
+    Block *block = new Block(block_texture, sf::Vector2f(START_X, START_Y), START_VALUE_BLOCK);
 
-    Block *block = new Block(block_texture, sf::Vector2f(250, 100), 2);
-    // Block *block1 = new Block(block_texture, sf::Vector2f(250, 400), 2);
+    board->setActiveBlock(block);
 
     while (window.isOpen())
     {
@@ -26,16 +31,26 @@ int main()
                 window.close();
             }
         }
-        Color color(255, 165, 0);
-        block->Update(time);
-        // std::cout << block->getState() << std::endl;
-        //  block1->Update(time);
-        //   std::cout << time << std::endl;
 
         window.clear(sf::Color::White);
 
-        window.draw(block->getSprite());
-        // window.draw(block1->getSprite());
+        if (board->getActiveBlock()->getState() == false)
+        {
+            block_texture.loadFromFile("source/cat1.jpg");
+
+            Block *block1 = new Block(block_texture, sf::Vector2f(START_X, START_Y), START_VALUE_BLOCK);
+
+            board->setActiveBlock(block1);
+        }
+
+        board->getActiveBlock()->Update(time);
+
+        // drawing all board
+        std::map<int, Block *> mapBlock = board->getMapBlock();
+        for (int i = 0; i < board->getCountBlock(); i++)
+        {
+            window.draw(mapBlock[i]->getSprite());
+        }
 
         window.display();
     }

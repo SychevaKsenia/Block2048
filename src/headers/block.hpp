@@ -8,7 +8,7 @@ enum class Direction : bool
     LEFT = 0,
     RIGHT = 1
 };
-constexpr float PLAYER_SPEED = 0.12;
+
 class Block
 {
 private:
