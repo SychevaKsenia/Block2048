@@ -32,7 +32,18 @@ int main()
             }
         }
 
+        board->getActiveBlock()->Update(time);
+        board->intersectionBlock();
+
+        // drawing all board
         window.clear(sf::Color::White);
+        std::map<int, Block *> mapBlock = board->getMapBlock();
+        for (int i = 0; i < board->getCountBlock(); i++)
+        {
+            window.draw(mapBlock[i]->getSprite());
+        }
+
+        window.display();
 
         if (board->getActiveBlock()->getState() == false)
         {
@@ -42,16 +53,5 @@ int main()
 
             board->setActiveBlock(block1);
         }
-
-        board->getActiveBlock()->Update(time);
-
-        // drawing all board
-        std::map<int, Block *> mapBlock = board->getMapBlock();
-        for (int i = 0; i < board->getCountBlock(); i++)
-        {
-            window.draw(mapBlock[i]->getSprite());
-        }
-
-        window.display();
     }
 }

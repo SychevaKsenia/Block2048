@@ -47,6 +47,6 @@ void BlockController::controll(Block *block, float time)
             block->setState(false);
         }
         std::cout << updated_pos.x << " " << updated_pos.y << std::endl;
-        block->setPosition(updated_pos);
+        block->setPositionBlock(updated_pos);
     }
 }

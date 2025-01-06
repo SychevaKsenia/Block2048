@@ -18,7 +18,7 @@ public:
     int getCountBlock();
     std::map<int, Block *> getMapBlock();
 
-private:
+protected:
     std::map<int, Block *> m_blocks;
     Block *m_activeBlock;
     int m_countBlock = 0;

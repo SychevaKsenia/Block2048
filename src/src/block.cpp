@@ -19,9 +19,10 @@ void Block::Update(float time)
     m_sprite.setPosition(m_pos);
 }
 
-void Block::setPosition(sf::Vector2f &pos)
+void Block::setPositionBlock(sf::Vector2f &pos)
 {
     m_pos = pos;
+    m_sprite.setPosition(m_pos);
 }
 
 void Block::setDirection(Direction direction)

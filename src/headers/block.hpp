@@ -26,7 +26,7 @@ public:
 
     void Update(float time);
 
-    void setPosition(sf::Vector2f &pos);
+    void setPositionBlock(sf::Vector2f &pos);
     void setDirection(Direction direction);
     void setValue(int &value);
     void setState(bool state);

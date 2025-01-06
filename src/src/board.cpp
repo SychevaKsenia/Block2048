@@ -33,6 +33,34 @@ void Board::createBlock(std::string &pathBlockTexture, int value)
 
 void Board::intersectionBlock()
 {
+    if (m_countBlock < 2)
+        return;
+
+    while (true)
+    {
+        bool flag = false;
+        for (int i = 0; i < m_countBlock; i++)
+        {
+            if (m_activeBlock->getSprite().getGlobalBounds().intersects(
+                    m_blocks[i]->getSprite().getGlobalBounds()) &&
+                m_activeBlock != m_blocks[i])
+            {
+                std::cout << "Collision detected!" << std::endl;
+                // m_activeBlock->setState(true);
+
+                int x = m_activeBlock->getPosition().x;
+                int y = m_activeBlock->getPosition().y - SIZE_BLOCK;
+                sf::Vector2f updated_pos(x, (y > START_Y) ? y : START_Y);
+                std::cout << "Update " << x << " " << y << std::endl;
+                m_activeBlock->setPositionBlock(updated_pos);
+                flag == true;
+                // надо поменять позицию объекта на нужную (поднять его вверз на 1 болок)
+            }
+        }
+
+        if (!flag)
+            break;
+    }
 }
 
 void Board::updateBoard()
