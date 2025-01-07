@@ -1,5 +1,8 @@
 #include "../headers/block.hpp"
 #include "../headers/controller.hpp"
+#include "../headers/constants.hpp"
+#include <iostream>
+
 Block::~Block() {}
 
 Block::Block(sf::Texture &texture, sf::Vector2f start_pos, int value)
@@ -17,6 +20,17 @@ void Block::Update(float time)
 {
     m_controller->controll(this, time);
     m_sprite.setPosition(m_pos);
+}
+
+int Block::determineNumberBlock()
+{
+    int x = m_pos.x / 100;
+    int y = (m_pos.y - START_Y) / 100;
+    int number = 5 * y + x;
+    // std::cout << number << std::endl;
+    //  m_blocks[number] = value;
+
+    return number;
 }
 
 void Block::setPositionBlock(sf::Vector2f &pos)

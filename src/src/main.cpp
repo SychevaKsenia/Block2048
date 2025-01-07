@@ -10,7 +10,7 @@ using namespace sf;
 int main()
 {
     sf::RenderWindow window({WINDOW_WEIGHT, WINDOW_HEIGHT}, "Block2028");
-    // window.setFramerateLimit(144);
+    window.setFramerateLimit(144);
 
     Board *board = new Board();
 
@@ -35,12 +35,15 @@ int main()
         board->getActiveBlock()->Update(time);
         board->intersectionBlock();
 
-        // drawing all board
+        //  drawing all board
         window.clear(sf::Color::White);
         std::map<int, Block *> mapBlock = board->getMapBlock();
         for (int i = 0; i < board->getCountBlock(); i++)
         {
-            window.draw(mapBlock[i]->getSprite());
+            if (mapBlock[i] != nullptr)
+            {
+                window.draw(mapBlock[i]->getSprite());
+            }
         }
 
         window.display();

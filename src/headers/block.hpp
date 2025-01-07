@@ -25,6 +25,7 @@ public:
     Block(sf::Texture &texture, sf::Vector2f start_pos, int value);
 
     void Update(float time);
+    int determineNumberBlock();
 
     void setPositionBlock(sf::Vector2f &pos);
     void setDirection(Direction direction);
