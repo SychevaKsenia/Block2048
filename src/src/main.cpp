@@ -14,10 +14,11 @@ int main()
 
     Board *board = new Board();
 
-    sf::Texture block_texture;
-    block_texture.loadFromFile("source/cat1.jpg");
-    Block *block = new Block(block_texture, sf::Vector2f(START_X, START_Y), START_VALUE_BLOCK);
+    // sf::Texture block_texture;
+    // block_texture.loadFromFile("source/cat1.jpg");
+    // Block *block = new Block(block_texture, sf::Vector2f(START_X, START_Y), START_VALUE_BLOCK);
 
+    Block *block = board->createBlock(START_X, START_Y, START_VALUE_BLOCK);
     board->setActiveBlock(block);
 
     while (window.isOpen())
@@ -50,10 +51,10 @@ int main()
 
         if (board->getActiveBlock()->getState() == false)
         {
-            block_texture.loadFromFile("source/cat1.jpg");
+            // block_texture.loadFromFile("source/cat1.jpg");
 
-            Block *block1 = new Block(block_texture, sf::Vector2f(START_X, START_Y), START_VALUE_BLOCK);
-
+            // Block *block1 = new Block(block_texture, sf::Vector2f(START_X, START_Y), START_VALUE_BLOCK);
+            Block *block1 = board->createBlock(START_X, START_Y, START_VALUE_BLOCK);
             board->setActiveBlock(block1);
         }
     }

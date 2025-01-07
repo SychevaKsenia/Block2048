@@ -5,14 +5,18 @@
 
 Block::~Block() {}
 
-Block::Block(sf::Texture &texture, sf::Vector2f start_pos, int value)
+Block::Block(std::string path_texture, sf::Vector2f start_pos, int value)
 {
     m_pos = start_pos;
     m_value = value;
     m_state = true;
+    if (!m_texture.loadFromFile(path_texture))
+    {
+        std::cerr << "Error loading texture from file: " << path_texture << std::endl;
+    }
     // m_controller = BlockController::getBlockController();
     BlockController m_controller;
-    m_sprite.setTexture(texture);
+    m_sprite.setTexture(m_texture);
     m_size = sf::Vector2f(m_sprite.getTextureRect().width, m_sprite.getTextureRect().height);
 }
 

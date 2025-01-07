@@ -7,7 +7,7 @@ class Board
 public:
     Board();
     void createBoard();
-    void createBlock(std::string &pathBlockTexture, int value);
+    Block *createBlock(int posX, int posY, int value);
     void intersectionBlock();
     void updateBoard();
 
@@ -22,4 +22,5 @@ private:
     std::map<int, Block *> m_blocks;
     Block *m_activeBlock;
     int m_countBlock = 30;
+    void mergeBlocks(int upperPos, int underPos, sf::Vector2f coord);
 };

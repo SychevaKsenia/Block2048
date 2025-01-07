@@ -24,16 +24,13 @@ void Board::createBoard()
 {
 }
 
-void Board::createBlock(std::string &pathBlockTexture, int value)
+Block *Board::createBlock(int posX, int posY, int value)
 {
     // sf::Texture block_texture;
-    // block_texture.loadFromFile(pathBlockTexture);
-    // m_activeBlock = new Block(block_texture, sf::Vector2f(250, 100), value);
-    // m_activeBlock->Update(300);
-
-    // m_window->clear(sf::Color::Red);
-    // m_window->draw(m_activeBlock->getSprite());
-    // m_window->display();
+    // block_texture.loadFromFile("source/cat1.jpg");
+    std::string path = "source/cat" + std::to_string(value) + ".jpg";
+    Block *block = new Block(path, sf::Vector2f(posX, posY), value);
+    return block;
 }
 
 void Board::intersectionBlock()
@@ -41,13 +38,13 @@ void Board::intersectionBlock()
     if (m_countBlock < 2)
         return;
 
-    std::cout << "map" << std::endl;
-    for (int i = 0; i < m_countBlock; i++)
-    {
-        if (m_blocks[i] != nullptr)
-            std::cout << i << " " << m_blocks[i]->getPosition().x << " " << m_blocks[i]->getPosition().y << std::endl;
-    }
-    std::cout << "-----" << std::endl;
+    // std::cout << "map" << std::endl;
+    // for (int i = 0; i < m_countBlock; i++)
+    // {
+    //     if (m_blocks[i] != nullptr)
+    //         std::cout << i << " " << m_blocks[i]->getPosition().x << " " << m_blocks[i]->getPosition().y << std::endl;
+    // }
+    // std::cout << "-----" << std::endl;
     // part1
     while (true)
     {
@@ -78,6 +75,56 @@ void Board::intersectionBlock()
         }
     }
     // part 2
+    /*
+    0 1 2 3 4
+    5  6  7  8  9
+    10 11 12 13 14
+    15 16 17 18 19
+    20 21 22 23 24
+    25 26 27 28 29
+
+    */
+    int col = m_activeBlock->getPosition().x / 100;
+    for (int i = 0; i < SIZE_BOARD_HEIGHT - 1; i++)
+    {
+
+        // int x = m_pos.x / 100;
+        // int y = (m_pos.y - START_Y) / 100;
+        // int number = 5 * y + x;
+        int curPosition = i * SIZE_BOARD_WEIGHT + col;
+        int nextPosition = curPosition + SIZE_BOARD_WEIGHT;
+        std::cout << curPosition << " " << nextPosition << std::endl;
+        if (m_blocks[curPosition] != nullptr && m_blocks[nextPosition] != nullptr && m_blocks[curPosition]->getValue() == m_blocks[nextPosition]->getValue())
+        {
+
+            mergeBlocks(curPosition, nextPosition, m_blocks[nextPosition]->getPosition());
+        }
+    }
+}
+
+void Board::mergeBlocks(int upperPos, int underPos, sf::Vector2f coord)
+{
+    std::cout << "merge" << std::endl;
+    std::cout << upperPos << " " << underPos << std::endl;
+    int value = m_blocks[upperPos]->getValue();
+    if (m_blocks[upperPos] != nullptr)
+    {
+        delete m_blocks[upperPos];
+        m_blocks[upperPos] = nullptr;
+    }
+
+    if (m_blocks[underPos] != nullptr)
+    {
+        delete m_blocks[underPos];
+        m_blocks[underPos] = nullptr;
+    }
+    // m_blocks[upperPos] = nullptr;
+    //  m_blocks[underPos] = nullptr;
+
+    std::cout << "Cooooooord" << coord.x << coord.y << std::endl;
+    m_blocks[underPos] = this->createBlock(coord.x, coord.y, value * value);
+    // m_blocks[underPos]->getSprite().setPosition(coord);
+    m_blocks[underPos]->setPositionBlock(coord);
 }
 
 void Board::updateBoard()
